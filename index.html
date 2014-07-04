@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Money Flows for you!</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="js/pouchdb-2.2.3.min.js"></script>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <h1 class="title"><a href="/">MoneyFlows</a><br>
+                <span class="subtitle">Where it goes, nobody knows...</span></h1>
+<!--                <nav>
+                    <ul>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                    </ul>
+                </nav>
+-->
+            </header>
+        </div>
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+            	
+				<section id="showFlows">
+					<header id="flowHeader">
+						<div class='col_dateDue'>
+							Due Date
+						</div><div class='col_harborTo'>
+							Flows To
+						</div><div class='col_amount'>
+							Amount
+						</div><div class='col_isScheduled'>
+							Scheduled?
+						</div><div class='col_datePaid'>
+							Paid on
+						</div><div class='col_harborFrom'>
+							Flows From
+						</div><div class='col_isLoan'>
+							Loan?
+						</div><div class='col_isTaxable'>
+							Taxable?
+						</div><div class='col_notes'>
+							Notes
+						</div>
+					</header>
+					<section id="flows"> </section>
+					<div id="newFlow">
+						<input id="dateDue" class="col_dateDue" type="date" placeholder="4/30" autofocus><input id="harborTo" class="col_harborTo" placeholder="Harbor"><input id="amount" class="col_amount" placeholder="$"><input id="isScheduled" class="col_isScheduled" type="checkbox"><input id="datePaid" class="col_datePaid" type="date" placeholder="4/30"><span id="hidden-inputs"><input id="harborFrom" class="col_harborFrom" placeholder="Harbor"><input id="isTaxable" class="col_isTaxable" type="checkbox"><input id="isLoan" class="col_isLoan" type="checkbox"><input id="notes" class="col_notes" placeholder="Notes">
+						</span>
+					</div>
+				</section>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+				<div id="syncWrapper">
+					<div id="sync-success">Currently syncing</div>
+					<div id="sync-error">There was a problem syncing</div>
+				</div>
+				<p>Double-click to edit</p>
+				<a href="/MoneyFlows/options.html">Options</a>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>');</script>
+
+        <script src="js/plugins.js"></script>
+        <script src="js/shared.js"></script>
+        <script src="js/main.js"></script>
+    </body>
+</html>
