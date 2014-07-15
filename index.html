@@ -10,6 +10,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<link rel="stylesheet" href="css/webfonts/notethis_regular_english/stylesheet.css" type="text/css" charset="utf-8" />
+		<link rel="stylesheet" href="css/webfonts/playtimewithhottoddies_regular_macroman/stylesheet.css" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
 
@@ -24,8 +26,11 @@
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title"><a href="/">MoneyFlows</a><br>
-                <span class="subtitle">Where it goes, nobody knows...</span></h1>
+                <h1 class="title"><a href="/">MoneyFlows</a></h1>
+                <div id="totals">
+                	Today, you might have $<span id="totalMaybe"> </span><br>
+                	On <span id="dateReal"> </span>, you had $<span id="totalReal"> </span>
+                </div>
 <!--                <nav>
                     <ul>
                         <li><a href="#">nav ul li a</a></li>
@@ -42,29 +47,29 @@
             	
 				<section id="showFlows">
 					<header id="flowHeader">
-						<div class='col_dateDue'>
+						<div class='col_dateDue' title="When is the money due to arrive?">
 							Due Date
-						</div><div class='col_harborTo'>
+						</div><div class='col_harborTo' title="Who is the money going to? Could be you!">
 							Flows To
-						</div><div class='col_amount'>
+						</div><div class='col_amount' title="HOW MUCH MONEY?!?">
 							Amount
-						</div><div class='col_isScheduled'>
-							Scheduled?
-						</div><div class='col_datePaid'>
-							Paid on
-						</div><div class='col_harborFrom'>
-							Flows From
-						</div><div class='col_isLoan'>
-							Loan?
-						</div><div class='col_isTaxable'>
-							Taxable?
-						</div><div class='col_notes'>
-							Notes
+						</div><div class='col_datePaid' title="Enter a date to mark it as paid or reconciled with your bank.">
+							Paid on/
+						</div><div class='col_isScheduled' title="Check if you've sent this payment.">
+							Sent
+						</div><div class='col_isScheduled' title="Check if you've sent this payment.">
+							Show
+						</div><div class='col_moneyMaybe' title="You *MIGHT* have this money on the Due Date!">
+							$ Maybe
+						</div><div class='col_moneyReal' title="You actually had this much money at this point in time.">
+							$ Real
 						</div>
 					</header>
 					<section id="flows"> </section>
 					<div id="newFlow">
-						<input id="dateDue" class="col_dateDue" type="date" placeholder="4/30" autofocus><input id="harborTo" class="col_harborTo" placeholder="Harbor"><input id="amount" class="col_amount" placeholder="$"><input id="isScheduled" class="col_isScheduled" type="checkbox"><input id="datePaid" class="col_datePaid" type="date" placeholder="4/30"><span id="hidden-inputs"><input id="harborFrom" class="col_harborFrom" placeholder="Harbor"><input id="isTaxable" class="col_isTaxable" type="checkbox"><input id="isLoan" class="col_isLoan" type="checkbox"><input id="notes" class="col_notes" placeholder="Notes">
+						<input id="dateDue" class="col_dateDue" type="date" placeholder="4/30" autofocus tabIndex="1"><input id="harborTo" class="col_harborTo" placeholder="Evil Corp" tabIndex="2"><input id="amount" class="col_amount" placeholder="$" tabIndex="3"><input id="datePaid" class="col_datePaid" type="date" placeholder="4/30" tabIndex="4"><input id="isScheduled" class="col_isScheduled" type="checkbox" tabIndex="5">
+						<span class="invisible flowHiddenInfo"><div>From <input id="harborFrom" class="col_harborFrom" placeholder="Probably you!!" tabIndex="6"></div><div>Is this flow taxable? <input id="isTaxable" class="col_isTaxable" type="checkbox" tabIndex="7"></div><div>Is this flow a loan? <input id="isLoan" class="col_isLoan" type="checkbox" tabIndex="8"></div>
+							<textarea id="notes" class="col_notes" tabIndex="9" rows="2">Notes</textarea>
 						</span>
 					</div>
 				</section>
@@ -78,7 +83,6 @@
 					<div id="sync-success">Currently syncing</div>
 					<div id="sync-error">There was a problem syncing</div>
 				</div>
-				<p>Double-click to edit</p>
 				<a href="/MoneyFlows/options.html">Options</a>
             </footer>
         </div>
