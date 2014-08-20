@@ -69,6 +69,7 @@ body {
     background-image: -o-repeating-linear-gradient(0deg, #b9d3ee, #b9d3ee 1px, transparent 1px, transparent 25px),-o-repeating-linear-gradient(-90deg, #b9d3ee, #b9d3ee 1px, transparent 1px, transparent 25px);
     background-image: repeating-linear-gradient(0deg, #b9d3ee, #b9d3ee 1px, transparent 1px, transparent 25px),repeating-linear-gradient(-90deg, #b9d3ee, #b9d3ee 1px, transparent 1px, transparent 25px);
     z-index:-4;
+    background-position: center top;
 }
 
 textarea {
@@ -136,7 +137,7 @@ nav a:hover {
    ============== */
 
 .main {
-    padding: 18px 0;
+    padding: 24px 0;
 }
 
 .main article h1 {
@@ -148,7 +149,7 @@ nav a:hover {
 }
 
 .footer-container footer {
-    padding: 20px 0;
+    padding: 13px 0;
 }
 
 /* ===============
@@ -181,34 +182,42 @@ nav a:hover {
 #totals {
 	float: right;
 	text-align: right;
+	font: 0.5em serif;
+	margin-top: 20px;
 }
-.col_dateDue, .col_harborTo, .col_amount, .col_isScheduled, .col_showPopup, .col_datePaid, .col_moneyMaybe, .col_moneyReal {
+.col_date, .col_harborTo, .col_amount, .col_status, .col_showPopup, .col_moneyMaybe, .col_moneyReal {
 	display: inline-block;
   	margin: 0;
   	padding: 0;
-  	width: 100px;
+  	width: 98px;
 	margin: 0 2px 0 0;
 	overflow-x: hidden;
 	height: 25px;
 	vertical-align: bottom;
 	white-space: nowrap;
 }
-.col_harborFrom, .col_isLoan, .col_isTaxable, .col_notes {
-	width: 100px;
+.col_status, .col_harborFrom, .col_isLoan, .col_isTaxable, .col_notes {
+	font: 18px/25px 'playtime_with_hot_toddiesRg', sans-serif;
 }
-.col_dateDue, .col_amount, .col_datePaid, .col_moneyMaybe, .col_moneyReal {
+.col_harborFrom {
+	display: inline-block;
+	width: 98px;
+}
+.col_date, .col_amount, .col_status, .col_moneyMaybe, .col_moneyReal {
 	text-align: right;
-	width: 75px;
+	width: 73px;
+	background: transparent;
+	border: none;
 }
-.col_datePaid {
-	margin-right: 0px;
+.col_status {
+	text-align: center;
 }
-.col_isScheduled, .col_showPopup, .col_isTaxable, .col_isLoan {
+.col_showPopup, .col_isTaxable, .col_isLoan {
 	width: 25px;
 }
 .col_notes {
-	max-width: 300px;
-	width: 300px;
+	max-width: 272px;
+	width: 272px;
 	white-space: normal;
 	overflow-x: unset;
 	height: auto;
@@ -216,14 +225,13 @@ nav a:hover {
 	border: none;
 }
 
-#flows {
+#flows, #flows select {
 	padding: 0;
 	margin: 0;
 	color: red;
 }
 #flows div {
 	position: relative; /* necessary to make .destroy position properly */
-	display: inline-block;
 }
 
 #flows div .view {
@@ -251,13 +259,14 @@ nav a:hover {
   display: none;
   position: absolute;
   top: 0;
-  right: -20px;
+  left: 0;
   bottom: 0;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   margin: auto 0;
   font-size: 22px;
-  color: #a88a8a;
+  color: #000;
+  text-align: center;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
   -ms-transition: all 0.2s;
@@ -276,21 +285,51 @@ nav a:hover {
 #flows div:hover .destroy {
   display: block;
 }
-.col_dateDue:hover ~ .flowHiddenInfo, .col_harborTo:hover ~ .flowHiddenInfo,
-.col_dateDue:focus ~ .flowHiddenInfo, .col_harborTo:focus ~ .flowHiddenInfo, .col_amount:focus ~ .flowHiddenInfo, .col_datePaid:focus ~ .flowHiddenInfo, .col_isScheduled:focus ~ .flowHiddenInfo, 
+
+#flows div .harborEdit {
+  display: none;
+  position: absolute;
+  top: -7px;
+  right: -9px;
+  width: 25px;
+  height: 25px;
+  margin: auto 0;
+  font-size: 14px;
+  color: #77f;
+  text-align: center;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+  -ms-transition: all 0.2s;
+  -o-transition: all 0.2s;
+  transition: all 0.2s;
+}
+
+#flows div .harborEdit:hover {
+  cursor: pointer;
+}
+
+#flows div .harborEdit:after {
+  content: '+';
+}
+
+#flows div.col_harborTo:hover .harborEdit, #flows div.col_harborFrom:hover .harborEdit {
+  display: block;
+}
+
+.col_showPopup:hover ~ .flowHiddenInfo,
 .flowHiddenInfo:hover, .flowHiddenInfo:focus {
 	visibility: visible;
 }
+
+.sent, .sent select {
+	color: #222 !important;
 }
-.isScheduled {
-	color: #222;
-}
-.reconciled {
-	color: green;
+.reconciled, .reconciled select {
+	color: green !important;
 }
 .flowHiddenInfo {
 	position: absolute;
-	width: 300px;
+	width: 272px;
 	padding: 3px 5px;
 	top: 23px;
 	left: 75px;
@@ -300,12 +339,17 @@ nav a:hover {
 	-moz-box-shadow:    1px 1px 1px 1px #333;
 	-webkit-box-shadow: 1px 1px 1px 1px #333;
 	box-shadow:         1px 1px 2px 2px #333;
+	font: .5em serif;
 	color: #222;
 }
 
 #flowHeader {
-	font-size: .7em;
 	border-bottom: 1px solid black;
+}
+#flowHeader div {
+	font: .5em serif;
+	position: relative;
+	top: 13px;
 }
 #newFlow {
 	border: 1px solid black;
@@ -317,7 +361,6 @@ nav a:hover {
 #newFlow .flowHiddenInfo {
 	z-index: 99;
 	left: 70px;
-	width: 300px;
 }
 /*#newFlow input:focus ~ .flowHiddenInfo {
 	visibility: visible;
@@ -328,24 +371,37 @@ nav a:hover {
 }
 
 .footer-container {
-	text-align: center;
-	font-family: serif;
-	font-size: .9em;
+	text-align: right;
+	font: .5em serif;
 }
-#sync-error, #sync-success {
+
+#sync-error, #sync-uptodate, #sync-change {
   display: none;
 }
-
-[data-sync-state=syncing] #sync-success {
-  display: block;
+[data-sync-state=uptodate] #sync-uptodate {
+  display: inline-block;
 }
-
 [data-sync-state=error] #sync-error {
-  display: block;
+  display: inline-block;
+  color: red;
+}
+[data-sync-state=change] #sync-change {
+  display: inline-block;
 }
 
 
+/* modify the harbor information */
 
+#harborFrom_name, #harborFrom_nameFull, #harborFrom_accountNum, #harborFrom_contactInfo, #harborFrom_notes, #harborTo_name, #harborTo_nameFull, #harborTo_accountNum, #harborTo_contactInfo, #harborTo_notes {
+	font: 18px/25px 'playtime_with_hot_toddiesRg', sans-serif;
+	background: transparent;
+	border: none;
+	width: 100%;
+}
+#harborFrom_name, #harborTo_name {
+	width: 98px;
+	display: inline-block;
+}
 
 /* placeholder text in input fields - for ALLLLLll the browsers!! */
 input::-webkit-input-placeholder {
@@ -442,14 +498,14 @@ input:-ms-input-placeholder {
     }
 }
 
-@media only screen and (min-width: 1140px) {
+@media only screen and (min-width: 575px) { /* was 1140px */
 
 /* ===============
     Maximal Width
    =============== */
 
     .wrapper {
-        width: 550px; /* 1026 = 1140px - 10% for margins */
+        width: 575px; /* 1026 = 1140px - 10% for margins */
         margin: 0 auto;
     }
 }

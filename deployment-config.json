@@ -1,0 +1,8 @@
+{
+  "type": "ftp",
+  "host": "example.com",
+  "user": "username",
+  "password": "password",
+  "port": "21",
+  "remote_path": "/example/path"
+}

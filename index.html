@@ -14,9 +14,12 @@
 		<link rel="stylesheet" href="css/webfonts/playtimewithhottoddies_regular_macroman/stylesheet.css" type="text/css" charset="utf-8" />
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/jquery-ui.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/pouchdb-2.2.3.min.js"></script>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="js/jquery-ui.min.js"></script>
 
     </head>
     <body>
@@ -28,8 +31,8 @@
             <header class="wrapper clearfix">
                 <h1 class="title"><a href="/">MoneyFlows</a></h1>
                 <div id="totals">
-                	Today, you might have $<span id="totalMaybe"> </span><br>
-                	On <span id="dateReal"> </span>, you had $<span id="totalReal"> </span>
+                	On <span id="dateReal"> </span>, you had $<span id="totalReal"> </span><br>
+                	Today, you might have $<span id="totalMaybe"> </span>
                 </div>
 <!--                <nav>
                     <ul>
@@ -47,32 +50,75 @@
             	
 				<section id="showFlows">
 					<header id="flowHeader">
-						<div class='col_dateDue' title="When is the money due to arrive?">
-							Due Date
+						<div class='col_date' title="When is the money due to arrive?">
+							Date
 						</div><div class='col_harborTo' title="Who is the money going to? Could be you!">
 							Flows To
 						</div><div class='col_amount' title="HOW MUCH MONEY?!?">
 							Amount
-						</div><div class='col_datePaid' title="Enter a date to mark it as paid or reconciled with your bank.">
-							Paid on/
-						</div><div class='col_isScheduled' title="Check if you've sent this payment.">
-							Sent
-						</div><div class='col_isScheduled' title="Check if you've sent this payment.">
-							Show
+						</div><div class='col_status' title="Chkd = verified accurate info&#10;Sent = on its way&#10;Paid = done and done!">
+							Status
+						</div><div class='col_showPopup' title="Check to show more options.">
+							More
 						</div><div class='col_moneyMaybe' title="You *MIGHT* have this money on the Due Date!">
-							$ Maybe
+							$Maybe
 						</div><div class='col_moneyReal' title="You actually had this much money at this point in time.">
-							$ Real
+							$Real
 						</div>
 					</header>
 					<section id="flows"> </section>
 					<div id="newFlow">
-						<input id="dateDue" class="col_dateDue" type="date" placeholder="4/30" autofocus tabIndex="1"><input id="harborTo" class="col_harborTo" placeholder="Evil Corp" tabIndex="2"><input id="amount" class="col_amount" placeholder="$" tabIndex="3"><input id="datePaid" class="col_datePaid" type="date" placeholder="4/30" tabIndex="4"><input id="isScheduled" class="col_isScheduled" type="checkbox" tabIndex="5">
-						<span class="invisible flowHiddenInfo"><div>From <input id="harborFrom" class="col_harborFrom" placeholder="Probably you!!" tabIndex="6"></div><div>Is this flow taxable? <input id="isTaxable" class="col_isTaxable" type="checkbox" tabIndex="7"></div><div>Is this flow a loan? <input id="isLoan" class="col_isLoan" type="checkbox" tabIndex="8"></div>
-							<textarea id="notes" class="col_notes" tabIndex="9" rows="2">Notes</textarea>
+						<input id="date" class="col_date" type="date" placeholder="4/30" autofocus tabIndex="99901"><input id="harborTo" class="col_harborTo" placeholder="Where to?" tabIndex="99902"><input id="amount" class="col_amount" placeholder="$" tabIndex="99903"><select id="status" class="col_status" tabIndex="99904">
+							<option> </option>
+							<option>Chkd</option>
+							<option>Sent</option>
+							<option>Paid</option>
+						</select>
+						<span class="invisible flowHiddenInfo"><div>From <input id="harborFrom" class="col_harborFrom" placeholder="Probably you!!" tabIndex="99906"></div><div>Is this flow taxable? <input id="isTaxable" class="col_isTaxable" type="checkbox" tabIndex="99907"></div><div>Is this flow a loan? <input id="isLoan" class="col_isLoan" type="checkbox" tabIndex="99908"></div>
+							<textarea id="notes" class="col_notes" tabIndex="99909" rows="2" placeholder="Notes"></textarea>
 						</span>
 					</div>
 				</section>
+				<div id="harborTo-info" title="Harbor Information">
+					<form>
+						<fieldset>
+							<input type="hidden" name="harborTo_rev" id="harborTo_rev" class="text ui-widget-content ui-corner-all">
+							<span name="harborTo_name" id="harborTo_name" class="text ui-widget-content ui-corner-all"> </span>
+							<label for="harborTo_isMine" title="Is the money in here yours?">Mine!</label><input type="checkbox" name="harborTo_isMine" id="harborTo_isMine" class="text ui-widget-content ui-corner-all">
+							<br>
+							<input type="text" name="harborTo_nameFull" id="harborTo_nameFull" class="text ui-widget-content ui-corner-all" placeholder="Full Name">
+							<br>
+							<input type="text" name="harborTo_accountNum" id="harborTo_accountNum" class="text ui-widget-content ui-corner-all" placeholder="Account Number">
+							<br>
+							<textarea name="harborTo_contactInfo" id="harborTo_contactInfo" placeholder="Contact Info"> </textarea>
+							<br>
+							<textarea name="harborTo_notes" id="harborTo_notes" placeholder="Notes"> </textarea>
+
+							<!-- Allow form submission with keyboard without duplicating the dialog button -->
+							<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+						</fieldset>
+					</form>
+				</div>
+				<div id="harborFrom-info" title="Harbor Information">
+					<form>
+						<fieldset>
+							<input type="hidden" name="harborFrom_rev" id="harborFrom_rev" class="text ui-widget-content ui-corner-all">
+							<span name="harborFrom_name" id="harborFrom_name" class="text ui-widget-content ui-corner-all"> </span>
+							<label for="harborFrom_isMine" title="Is the money in here yours?">Mine!</label><input type="checkbox" name="harborFrom_isMine" id="harborFrom_isMine" class="text ui-widget-content ui-corner-all">
+							<br>
+							<input type="text" name="harborFrom_nameFull" id="harborFrom_nameFull" class="text ui-widget-content ui-corner-all" placeholder="Full Name">
+							<br>
+							<input type="text" name="harborFrom_accountNum" id="harborFrom_accountNum" class="text ui-widget-content ui-corner-all" placeholder="Account Number">
+							<br>
+							<textarea name="harborFrom_contactInfo" id="harborFrom_contactInfo" placeholder="Contact Info"> </textarea>
+							<br>
+							<textarea name="harborFrom_notes" id="harborFrom_notes" placeholder="Notes"> </textarea>
+
+							<!-- Allow form submission with keyboard without duplicating the dialog button -->
+							<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+						</fieldset>
+					</form>
+				</div>
 
             </div> <!-- #main -->
         </div> <!-- #main-container -->
@@ -80,14 +126,14 @@
         <div class="footer-container">
             <footer class="wrapper">
 				<div id="syncWrapper">
-					<div id="sync-success">Currently syncing</div>
-					<div id="sync-error">There was a problem syncing</div>
+					<div id="sync-uptodate">In sync | </div>
+					<div id="sync-error">There was a problem syncing | </div>
+					<div id="sync-change">Need to sync | </div>
+					<a href="/MoneyFlows/options.html">Options</a>
 				</div>
-				<a href="/MoneyFlows/options.html">Options</a>
             </footer>
         </div>
 
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.0.min.js"><\/script>');</script>
 
         <script src="js/plugins.js"></script>
