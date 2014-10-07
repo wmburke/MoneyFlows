@@ -153,12 +153,12 @@
 		
 		checkIfNew: function(harborTo, harborFrom) {
 		// See if the harbor is a new one when a new flow is added
-			if(!harbors.dbInfo.names[harborFrom] && harborFrom !== "") {
+			if(harbors.dbInfo.names[harborFrom] === "undefined" && harborFrom !== "") {
 				dom.harborFrom_name.textContent = harborFrom;
 				$("#harborFrom-info").dialog("open");
 				$("#harborTo-isMine").focus();
 			}
-			if(!harbors.dbInfo.names[harborTo] && harborTo !== "") {
+			if(harbors.dbInfo.names[harborTo] === "undefined" && harborTo !== "") {
 				dom.harborTo_name.textContent = harborTo;
 				$("#harborTo-info").dialog("open");
 			}
