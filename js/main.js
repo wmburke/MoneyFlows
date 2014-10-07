@@ -156,6 +156,7 @@
 			if(!harbors.dbInfo.names[harborFrom] && harborFrom !== "") {
 				dom.harborFrom_name.textContent = harborFrom;
 				$("#harborFrom-info").dialog("open");
+				$("#harborTo-isMine").focus();
 			}
 			if(!harbors.dbInfo.names[harborTo] && harborTo !== "") {
 				dom.harborTo_name.textContent = harborTo;
@@ -201,6 +202,9 @@
 				width: 350,
 				modal: true,
 				buttons: {
+					"Cancel": function() {
+						$("#harborTo-info").dialog( "close" );
+					},
 					"Done": function() {
 						harbors.saveToDB("To");
 					}
@@ -218,6 +222,9 @@
 				buttons: {
 					"Done": function() {
 						harbors.saveToDB("From");
+					},
+					"Cancel": function() {
+						$("#harborFrom-info").dialog( "close" );
 					}
 				},
 				position: {
@@ -262,11 +269,11 @@
 					});
 					delete flow._id;
 				}
-			} else {
-				flow.dateYr = "";
-				flow.dateMo = "";
-				flow.dateDy = "";
-			}
+			} // else {
+//				flow.dateYr = "";
+//				flow.dateMo = "";
+//				flow.dateDy = "";
+//			}
 
 			// create an ID that is useful
 			if (!flow._id) {
@@ -279,7 +286,7 @@
 			}
 			
 			// Format amount - we don't any funny programmatic rounding stuff
-			flow.amount = flow.amount * 1000;
+			flow.amount = Math.abs(flow.amount) * 1000;
 			
 			// Check for notes
 			if (flow.notes === "") {
@@ -346,6 +353,7 @@
 		// The checkbox value changed - save it to the DB
 		// name is the name of the element in the database
 			flow[name] = event.target.checked;
+			dateRaw = dom.date.value;
 			flows.saveToDB(flow);
 		},
 		
