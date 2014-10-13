@@ -153,14 +153,15 @@
 		
 		checkIfNew: function(harborTo, harborFrom) {
 		// See if the harbor is a new one when a new flow is added
-			if(harbors.dbInfo.names[harborFrom] === "undefined" && harborFrom !== "") {
+			if(typeof harbors.dbInfo.names[harborFrom] === "undefined" && harborFrom !== "") {
 				dom.harborFrom_name.textContent = harborFrom;
 				$("#harborFrom-info").dialog("open");
-				$("#harborTo-isMine").focus();
+				$("#harborFrom-isMine").focus();
 			}
-			if(harbors.dbInfo.names[harborTo] === "undefined" && harborTo !== "") {
+			if(typeof harbors.dbInfo.names[harborTo] === "undefined" && harborTo !== "") {
 				dom.harborTo_name.textContent = harborTo;
 				$("#harborTo-info").dialog("open");
+				$("#harborTo-isMine").focus();
 			}
 		},
 		
@@ -353,8 +354,8 @@
 		// The checkbox value changed - save it to the DB
 		// name is the name of the element in the database
 			flow[name] = event.target.checked;
-			dateRaw = dom.date.value;
-			flows.saveToDB(flow);
+			var dateRaw = dom.date.value;
+			flows.saveToDB(flow, dateRaw);
 		},
 		
 		checkboxShowPopup: function(event, flow, name) {
