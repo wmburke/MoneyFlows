@@ -228,7 +228,7 @@ nav a:hover {
 #flows, #flows select {
 	padding: 0;
 	margin: 0;
-	color: red;
+	color: blue;
 }
 #flows div {
 	position: relative; /* necessary to make .destroy position properly */
@@ -325,7 +325,7 @@ nav a:hover {
 	color: #222 !important;
 }
 .reconciled, .reconciled select {
-	color: green !important;
+	color: lightgrey !important;
 }
 .flowHiddenInfo {
 	position: absolute;
